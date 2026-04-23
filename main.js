@@ -1,32 +1,28 @@
 // ─── CARRUSEL ───
-const ALL_IMAGES = [
-  "imgs/carrusel_plataforma/cap1.png",
-  "imgs/carrusel_plataforma/cap2.png",
-  "imgs/carrusel_plataforma/cap3.png",
-  "imgs/carrusel_plataforma/cap4.png",
-  "imgs/carrusel_plataforma/cap5.png",
-  "imgs/carrusel_plataforma/cap6.png",
-  "imgs/carrusel_plataforma/cap7.png",
-  "imgs/carrusel_plataforma/cap8.png",
-  "imgs/carrusel_plataforma/cap9.png",
-  "imgs/carrusel_plataforma/cap10.png",
-  "imgs/carrusel_plataforma/cap11.png",
-  "imgs/carrusel_plataforma/cap12.png",
-  "imgs/carrusel_plataforma/cap13.png",
-  "imgs/carrusel_plataforma/cap14.png",
-  "imgs/carrusel_plataforma/cap15.png",
-  "imgs/carrusel_plataforma/cap16.png",
-  "imgs/carrusel_plataforma/cap17.png",
-  "imgs/carrusel_plataforma/cap18.png",
-  "imgs/carrusel_plataforma/cap19.png",
-  "imgs/carrusel_plataforma/cap20.png",
+const IMAGES_ITTEC = [
+  "imgs/ittec/cap1.png","imgs/ittec/cap2.png","imgs/ittec/cap3.png",
+  "imgs/ittec/cap4.png","imgs/ittec/cap5.png","imgs/ittec/cap6.png",
+  "imgs/ittec/cap7.png","imgs/ittec/cap8.png","imgs/ittec/cap9.png",
+  "imgs/ittec/cap10.png","imgs/ittec/cap11.png","imgs/ittec/cap12.png",
+  "imgs/ittec/cap13.png","imgs/ittec/cap14.png","imgs/ittec/cap15.png",
+  "imgs/ittec/cap16.png","imgs/ittec/cap17.png","imgs/ittec/cap18.png",
+];
+
+const IMAGES_COLEGIO = [
+  "imgs/colegio/cap19.png","imgs/colegio/cap20.png","imgs/colegio/cap21.png",
+  "imgs/colegio/cap22.png","imgs/colegio/cap23.png","imgs/colegio/cap24.png",
+  "imgs/colegio/cap25.png","imgs/colegio/cap26.png","imgs/colegio/cap27.png",
+  "imgs/colegio/cap28.png","imgs/colegio/cap29.png","imgs/colegio/cap30.png",
+  "imgs/colegio/cap31.png","imgs/colegio/cap32.png","imgs/colegio/cap33.png",
+  "imgs/colegio/cap34.png","imgs/colegio/cap35.png","imgs/colegio/cap36.png",
+  "imgs/colegio/cap37.png",
 ];
 
 function shuffle(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
-function initCarousel(id, images) {
+function initCarousel(id, images, delay) {
   const root = document.getElementById(id);
   if (!root) return;
 
@@ -65,7 +61,7 @@ function initCarousel(id, images) {
 
   function resetTimer() {
     clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 4000);
+    timer = setInterval(() => goTo(current + 1), delay);
   }
 
   root
@@ -78,11 +74,8 @@ function initCarousel(id, images) {
   goTo(0);
 }
 
-// Barajar todas y repartir: cada card recibe imágenes distintas en cada carga
-const split = shuffle(ALL_IMAGES);
-const half = Math.ceil(split.length / 2);
-initCarousel("carousel-ittec", split.slice(0, half));
-initCarousel("carousel-colegio", split.slice(half));
+initCarousel("carousel-ittec", shuffle(IMAGES_COLEGIO), 3000);
+initCarousel("carousel-colegio", shuffle(IMAGES_ITTEC), 5500);
 
 // ─── LIGHTBOX ───
 const lightbox = document.getElementById("lightbox");
