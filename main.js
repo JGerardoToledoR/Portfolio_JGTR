@@ -1,15 +1,26 @@
 // ─── CARRUSEL ───
-// Para agregar imágenes: pon los archivos en la carpeta y añade la ruta al array.
-const CAROUSEL_IMAGES = {
-  'carousel-ittec': [
-    // 'imgs/ittec/screenshot-01.png',
-    // 'imgs/ittec/screenshot-02.png',
-  ],
-  'carousel-colegio': [
-    // 'imgs/colegio/screenshot-01.png',
-    // 'imgs/colegio/screenshot-02.png',
-  ],
-};
+const ALL_IMAGES = [
+  'imgs/carrusel_plataforma/cap1.png',
+  'imgs/carrusel_plataforma/cap2.png',
+  'imgs/carrusel_plataforma/cap3.png',
+  'imgs/carrusel_plataforma/cap4.png',
+  'imgs/carrusel_plataforma/cap5.png',
+  'imgs/carrusel_plataforma/cap6.png',
+  'imgs/carrusel_plataforma/cap7.png',
+  'imgs/carrusel_plataforma/cap8.png',
+  'imgs/carrusel_plataforma/cap9.png',
+  'imgs/carrusel_plataforma/cap10.png',
+  'imgs/carrusel_plataforma/cap11.png',
+  'imgs/carrusel_plataforma/cap12.png',
+  'imgs/carrusel_plataforma/cap13.png',
+  'imgs/carrusel_plataforma/cap14.png',
+  'imgs/carrusel_plataforma/cap15.png',
+  'imgs/carrusel_plataforma/cap16.png',
+  'imgs/carrusel_plataforma/cap17.png',
+  'imgs/carrusel_plataforma/cap18.png',
+  'imgs/carrusel_plataforma/cap19.png',
+  'imgs/carrusel_plataforma/cap20.png',
+];
 
 function shuffle(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
@@ -21,17 +32,16 @@ function initCarousel(id, images) {
 
   const emptyMsg = root.querySelector('.carousel-empty');
 
-  if (!images.length) return; // muestra el placeholder hasta que haya imágenes
+  if (!images.length) return;
 
   emptyMsg.classList.add('hidden');
 
   const track = root.querySelector('.carousel-track');
   const dotsWrap = root.querySelector('.carousel-dots');
-  const shuffled = shuffle(images);
   let current = 0;
   let timer;
 
-  shuffled.forEach((src) => {
+  images.forEach((src) => {
     const img = document.createElement('img');
     img.src = src;
     img.alt = '';
@@ -45,7 +55,7 @@ function initCarousel(id, images) {
   const dots = dotsWrap.querySelectorAll('.carousel-dot');
 
   function goTo(index) {
-    current = (index + shuffled.length) % shuffled.length;
+    current = (index + images.length) % images.length;
     track.style.transform = `translateX(-${current * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     resetTimer();
@@ -62,7 +72,11 @@ function initCarousel(id, images) {
   goTo(0);
 }
 
-Object.entries(CAROUSEL_IMAGES).forEach(([id, imgs]) => initCarousel(id, imgs));
+// Barajar todas y repartir: cada card recibe imágenes distintas en cada carga
+const split = shuffle(ALL_IMAGES);
+const half = Math.ceil(split.length / 2);
+initCarousel('carousel-ittec', split.slice(0, half));
+initCarousel('carousel-colegio', split.slice(half));
 
 // ─── SCROLL REVEAL ───
 const observer = new IntersectionObserver(
