@@ -432,7 +432,6 @@ section {
     height: 100%;
     object-fit: cover;
     flex-shrink: 0;
-    pointer-events: none;
     user-select: none;
 }
 
@@ -700,6 +699,95 @@ section {
     width: 16px;
     height: 16px;
 }
+
+/* ── CV DOWNLOAD ── */
+.cv-download {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* ── LIGHTBOX ── */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s;
+}
+
+#lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#lightbox-img,
+#lightbox-video {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 8px 48px rgba(0, 0, 0, .7);
+    user-select: none;
+}
+
+#lightbox-img { display: block; }
+#lightbox-video { display: none; }
+
+#lightbox-close,
+#lightbox-prev,
+#lightbox-next {
+    position: absolute;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .15);
+    color: #fff;
+    cursor: pointer;
+    opacity: .7;
+    transition: opacity .2s, background .2s;
+    line-height: 1;
+    padding: 0;
+    border-radius: 50%;
+}
+
+#lightbox-close:hover,
+#lightbox-prev:hover,
+#lightbox-next:hover { opacity: 1; background: rgba(255, 255, 255, .18); }
+
+#lightbox-close {
+    top: 18px;
+    right: 24px;
+    font-size: 2.2rem;
+    width: 42px;
+    height: 42px;
+}
+
+#lightbox-prev,
+#lightbox-next {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.4rem;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox-prev { left: 20px; }
+#lightbox-next { right: 20px; }
 
 /* ─── FOOTER ─── */
 footer {
